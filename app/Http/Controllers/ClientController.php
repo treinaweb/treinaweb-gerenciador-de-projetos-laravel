@@ -1,9 +1,8 @@
 <?php
 
 //validação dos dados
-//paginação
-//colocar mensagem para o usuário
-//mensagem nenhum cliente cadastrado
+//colocar mensagem para o usuário quanto cadastrar ou atualizar
+
 
 namespace App\Http\Controllers;
 
@@ -21,7 +20,7 @@ class ClientController extends Controller
      */
     public function index(): View
     {
-        $clients = Client::get();
+        $clients = Client::paginate(15);
 
         return view('clients.index', [
             'clients' => $clients
