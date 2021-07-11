@@ -28,6 +28,12 @@
       </div>
     </nav>
 
+    @if (session('mensagem'))
+      <div class="alert alert-success">
+        {{ session('mensagem') }}
+      </div>
+    @endif
+
     <div class="container">
         @yield('conteudo')
     </div>
