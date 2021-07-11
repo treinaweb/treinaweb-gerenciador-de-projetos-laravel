@@ -1,5 +1,10 @@
 <?php
 
+//validação dos dados
+//paginação
+//colocar mensagem para o usuário
+//mensagem nenhum cliente cadastrado
+
 namespace App\Http\Controllers;
 
 use App\Models\Client;
