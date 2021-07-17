@@ -42,10 +42,9 @@ class EmployeeRequest extends FormRequest
     {
         $dados = $this->all();
 
-        $dados['cpf'] = str_replace(['.', '-'], '', $dados['cpf']);
-        $dados['cep'] = str_replace('-', '', $dados['cep']);
-        $dados['data_contratacao'] = Carbon::createFromFormat('d/m/Y', $dados['data_contratacao'])
-                                                ->toDateString();
+        $dados['cpf'] = limpa_mascara($dados['cpf']);
+        $dados['cep'] = limpa_mascara($dados['cep']);
+        $dados['data_contratacao'] = date_to_iso($dados['data_contratacao']);
 
         $this->replace($dados);
 
