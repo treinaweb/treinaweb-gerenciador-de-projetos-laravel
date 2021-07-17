@@ -55,7 +55,11 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+
+        return view('employees.show', [
+            'employee' => $employee
+        ]);
     }
 
     /**
@@ -100,6 +104,11 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+
+        $employee->delete();
+
+        return redirect()->route('employees.index')
+                        ->with('mensagem', 'Funcionário apagado com sucesso!');
     }
 }
