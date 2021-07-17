@@ -66,7 +66,11 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+
+        return view('employees.edit', [
+            'employee' => $employee
+        ]);
     }
 
     /**
@@ -78,7 +82,14 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+
+        $employee->update(
+            $request->except(['_token', '_method'])
+        );
+
+        return redirect()->route('employees.index')
+                        ->with('mensagem', 'Funcionário atualizado com sucesso!');
     }
 
     /**
