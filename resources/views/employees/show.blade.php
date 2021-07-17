@@ -10,7 +10,13 @@
             <p><strong>nome: </strong> {{ $employee->nome }}</p>
             <p><strong>CPF: </strong> {{ formata_cpf($employee->cpf) }}</p>
             <p><strong>Data de Contratação: </strong> {{ date_to_br($employee->data_contratacao) }}</p>
-            <p><strong>Situação: </strong> {{ situacao_funcionario($employee->data_demissao) }}</p>
+            <p>
+                <strong>Situação: </strong> {{ situacao_funcionario($employee->data_demissao) }}
+            
+                @if (!$employee->data_demissao)
+                    <a href="{{ route('employees.inativar', $employee) }}" class="btn btn-danger">Inativar Funcionário</a>
+                @endif    
+            </p>
         </div>
     </div>  
     <div class="card mt-3">

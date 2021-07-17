@@ -12,7 +12,7 @@ if (!function_exists('situacao_funcionario'))
 {
     function situacao_funcionario(string $dataDemissao = null): string
     {
-        return $dataDemissao === null ? 'Ativo' : 'Demitido';
+        return $dataDemissao === null ? 'Ativo' : 'Inativo';
     }
 }
 
