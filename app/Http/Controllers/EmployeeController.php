@@ -28,7 +28,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('employees.create');
     }
 
     /**
@@ -39,7 +39,12 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->except('_token');
+
+        Employee::create($dados);
+
+        return redirect()->route('employees.index')
+                        ->with('mensagem', 'Funcionário cadastrado com sucesso!');
     }
 
     /**
