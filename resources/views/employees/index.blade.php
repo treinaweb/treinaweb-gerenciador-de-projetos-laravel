@@ -19,7 +19,7 @@
                 <tr>
                     <th scope="row">{{ $employee->id }}</th>
                     <td><a href="{{ route('employees.show', $employee) }}">{{ $employee->nome }}</a></td>
-                    <td>{{ $employee->data_contratacao }}</td>
+                    <td>{{ date_to_br($employee->data_contratacao) }}</td>
                     <td>{{ $employee->data_demissao === null ? 'Ativo' : 'Demitido' }}</td>
 
                     <td>
