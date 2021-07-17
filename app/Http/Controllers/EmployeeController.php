@@ -95,9 +95,15 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
 
-        $employee->update(
-            $request->except(['_token', '_method'])
-        );
+        DB::transaction(function() use ($request, $employee) {
+            $employee->update(
+                $request->only(['nome', 'cpf', 'data_contratacao'])
+            );
+
+            $employee->address->update(
+                $request->only(['logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'cep', 'estado'])
+            );
+        });
 
         return redirect()->route('employees.index')
                         ->with('mensagem', 'Funcionário atualizado com sucesso!');
@@ -113,7 +119,11 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
 
-        $employee->delete();
+        DB::transaction(function() use ($employee) {
+            $employee->address->delete();
+
+            $employee->delete();
+        });
 
         return redirect()->route('employees.index')
                         ->with('mensagem', 'Funcionário apagado com sucesso!');
