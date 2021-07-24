@@ -83,7 +83,15 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $projeto = Project::findOrFail($id);
+        $clientes = Client::get();
+        $funcionarios = Employee::get();
+
+        return view('projects.edit', [
+            'project' => $projeto,
+            'clientes' => $clientes,
+            'funcionarios' => $funcionarios
+        ]);
     }
 
     /**
@@ -95,7 +103,18 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $project = Project::findOrFail($id);
+
+        DB::transaction(function() use($request, $project) {
+            $project->update(
+                $request->except(['_token', 'funcionarios'])
+            );
+
+            $project->employees()->sync($request->funcionarios);
+        });
+
+        return redirect()->route('projects.index')
+                        ->with('mensagem', 'Projeto atualizado com sucesso!');
     }
 
     /**
