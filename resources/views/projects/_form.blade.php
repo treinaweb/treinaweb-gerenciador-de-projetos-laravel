@@ -34,13 +34,13 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="data_inicio">Data Início</label>
-            <input required value="{{ date_to_br(old('data_inicio', $project->data_inicio ?? '')) }}"  class="form-control" type="text" name="data_inicio" id="data_inicio" data-mask="00/00/0000" placeholder="Digite a data de início">
+            <input required value="{{ old('data_inicio', isset($project->data_inicio) ? date_to_br($project->data_inicio) : '') }}"  class="form-control" type="text" name="data_inicio" id="data_inicio" data-mask="00/00/0000" placeholder="Digite a data de início">
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="data_final">Data Final</label>
-            <input required value="{{ date_to_br(old('data_final', $project->data_final ?? '')) }}" class="form-control" type="text" name="data_final" id="data_final" data-mask="00/00/0000" placeholder="Digite a data de Final">
+            <input required value="{{ old('data_final', isset($project->data_final) ? date_to_br($project->data_final) : '') }}" class="form-control" type="text" name="data_final" id="data_final" data-mask="00/00/0000" placeholder="Digite a data de Final">
         </div>
     </div>
     <div class="col-md-4"> 
