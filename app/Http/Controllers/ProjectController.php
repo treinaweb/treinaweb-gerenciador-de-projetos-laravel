@@ -125,6 +125,15 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::findOrFail($id);
+
+        DB::transaction(function() use($project) {
+            $project->employees()->sync([]);
+
+            $project->delete();
+        });
+
+        return redirect()->route('projects.index')
+                            ->with('mensagem', 'Projeto excluido com sucesso!');
     }
 }
