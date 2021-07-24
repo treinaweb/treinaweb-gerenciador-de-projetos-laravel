@@ -16,7 +16,7 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="data_contratacao">Data Contratação</label>
-            <input required value="{{ date_to_br(old('data_contratacao', $employee->data_contratacao ?? '')) }}" class="form-control" type="text" name="data_contratacao" id="data_contratacao" data-mask="00/00/0000" placeholder="Digite a data de contratação">
+            <input required value="{{ old('data_contratacao', isset($employee->data_contratacao) ? date_to_br($employee->data_contratacao) : '' ) }}" class="form-control" type="text" name="data_contratacao" id="data_contratacao" data-mask="00/00/0000" placeholder="Digite a data de contratação">
         </div>
     </div>
 </div>
