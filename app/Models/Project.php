@@ -9,7 +9,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'orcamento', 'data_inicio', 'data_final'];
+    protected $fillable = ['nome', 'orcamento', 'data_inicio', 'data_final', 'client_id'];
 
     /**
      * Define a relação com cliente

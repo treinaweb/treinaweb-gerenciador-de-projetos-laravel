@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -47,7 +48,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        DB::transaction(function() use($request) {
+            $project = project::create(
+                $request->except(['_token', 'funcionarios'])
+            );
+
+            $project->employees()->attach($request->funcionarios);
+        });
+
+        return redirect()->route('projects.index')
+                        ->with('mensagem', 'Projeto criado com sucesso!');
     }
 
     /**
