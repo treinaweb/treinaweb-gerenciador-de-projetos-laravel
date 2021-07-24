@@ -24,5 +24,5 @@
         </tbody>
     </table>
 
-    <a class="btn btn-success" href="#">Novo Projeto</a>
+    <a class="btn btn-success" href="{{ route('projects.create') }}">Novo Projeto</a>
 @endsection    
