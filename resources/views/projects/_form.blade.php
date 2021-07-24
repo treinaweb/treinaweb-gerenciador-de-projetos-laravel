@@ -19,7 +19,11 @@
             <select class="form-control" id="cliente_id" required="required" name="client_id">
                 <option>Selecione o cliente</option>
                 @foreach ($clientes as $cliente)
-                    <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
+                    <option 
+                        {{ ($project->client_id ?? '') === $cliente->id ? 'selected' : '' }}
+                        value="{{ $cliente->id }}">
+                        {{ $cliente->nome }}
+                    </option>
                 @endforeach
             </select>
         </div>
@@ -39,12 +43,16 @@
             <input required value="{{ old('data_final', $project->data_final ?? '') }}" class="form-control" type="text" name="data_final" id="data_final"  placeholder="Digite a data de Final">
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4"> 
         <div class="form-group">
             <label for="funcionarios">Funcionários Alocados</label>
             <select class="form-control" name="funcionarios[]" multiple required="required">
                 @foreach ($funcionarios as $funcionario)
-                    <option value="{{ $funcionario->id }}">{{ $funcionario->nome }}</option>
+                    <option 
+                        {{ in_array($funcionario->id, isset($project) ? $project->employees->pluck('id')->toArray() : []) ? 'selected' : '' }}
+                        value="{{ $funcionario->id }}">
+                        {{ $funcionario->nome }}
+                    </option>
                 @endforeach
             </select>
         </div>
