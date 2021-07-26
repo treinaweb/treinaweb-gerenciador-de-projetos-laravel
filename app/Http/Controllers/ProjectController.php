@@ -32,7 +32,7 @@ class ProjectController extends Controller
     public function create()
     {
         $clientes = Client::get();
-        $funcionarios = Employee::get();
+        $funcionarios = Employee::ativos();
 
         return view('projects.create', [
             'clientes' => $clientes,
@@ -85,7 +85,8 @@ class ProjectController extends Controller
     {
         $projeto = Project::findOrFail($id);
         $clientes = Client::get();
-        $funcionarios = Employee::get();
+        $funcionarios = Employee::ativos();
+
 
         return view('projects.edit', [
             'project' => $projeto,
