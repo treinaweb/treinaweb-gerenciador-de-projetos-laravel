@@ -17,7 +17,7 @@ class CreateEmployeeProjectTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('employee_id');
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
 
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')->references('id')->on('projects');
