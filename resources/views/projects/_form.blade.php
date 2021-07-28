@@ -15,8 +15,8 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <label for="cliente_id">Cliente</label>
-            <select class="form-control" id="cliente_id" required="required" name="client_id">
+            <label for="client_id">Cliente</label>
+            <select class="form-control" id="client_id" required="required" name="client_id">
                 <option>Selecione o cliente</option>
                 @foreach ($clientes as $cliente)
                     <option 
@@ -46,7 +46,7 @@
     <div class="col-md-4"> 
         <div class="form-group">
             <label for="funcionarios">Funcionários Alocados</label>
-            <select class="form-control" name="funcionarios[]" multiple required="required">
+            <select class="form-control" name="funcionarios[]" multiple required="required" id="funcionarios">
                 @foreach ($funcionarios as $funcionario)
                     <option 
                         {{ in_array($funcionario->id, isset($project) ? $project->employees->pluck('id')->toArray() : []) ? 'selected' : '' }}
