@@ -9,15 +9,13 @@ use Illuminate\Http\Request;
 class InativarFuncionario extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Inativa um funcionário
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return void
      */
-    public function __invoke(int $id)
+    public function __invoke(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
-
         if ($employee->data_demissao) {
             return redirect()->route('employees.show', $employee)
                                 ->with('mensagem', 'Esse funcionário já está inativo!');

@@ -57,13 +57,11 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Employee $employee
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
-
         return view('employees.show', [
             'employee' => $employee
         ]);
@@ -72,13 +70,11 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Employee $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
-
         return view('employees.edit', [
             'employee' => $employee
         ]);
@@ -88,13 +84,11 @@ class EmployeeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  EmployeeRequest $request
-     * @param  int  $id
+     * @param  Employee $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(EmployeeRequest $request, $id)
+    public function update(EmployeeRequest $request, Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
-
         DB::transaction(function() use ($request, $employee) {
             $employee->update(
                 $request->only(['nome', 'cpf', 'data_contratacao'])
@@ -112,13 +106,11 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Employee $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
-
         DB::transaction(function() use ($employee) {
             $employee->address->delete();
 

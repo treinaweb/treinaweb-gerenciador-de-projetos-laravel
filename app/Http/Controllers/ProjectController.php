@@ -78,18 +78,16 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Project $project
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        $projeto = Project::findOrFail($id);
         $clientes = Client::get();
         $funcionarios = Employee::ativos();
 
-
         return view('projects.edit', [
-            'project' => $projeto,
+            'project' => $project,
             'clientes' => $clientes,
             'funcionarios' => $funcionarios
         ]);
@@ -99,13 +97,11 @@ class ProjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  ProjectRequest $request
-     * @param  int  $id
+     * @param  Project $project
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectRequest $request, $id)
+    public function update(ProjectRequest $request, Project $project)
     {
-        $project = Project::findOrFail($id);
-
         DB::transaction(function() use($request, $project) {
             $project->update(
                 $request->except(['_token', 'funcionarios'])
@@ -121,13 +117,11 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Project $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        $project = Project::findOrFail($id);
-
         DB::transaction(function() use($project) {
             $project->employees()->sync([]);
 

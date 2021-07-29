@@ -24,7 +24,7 @@ class Project extends Model
     /**
      * Define a relação com os funcionários
      *
-     * @return void
+     * @return 
      */
     public function employees()
     {

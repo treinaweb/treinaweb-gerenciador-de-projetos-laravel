@@ -26,13 +26,11 @@ class ClientController extends Controller
     /**
      * Mostra um cliente especifico
      *
-     * @param integer $id
+     * @param Client $client
      * @return View
      */
-    public function show(int $id): View
+    public function show(Client $client): View
     {
-        $client = Client::findOrFail($id);
-
         return view('clients.show', [
             'client' => $client
         ]);
@@ -67,13 +65,11 @@ class ClientController extends Controller
     /**
      * Mostra o formulário para edição
      *
-     * @param integer $id
+     * @param Client $client
      * @return View
      */
-    public function edit(int $id): View
+    public function edit(Client $client): View
     {
-        $client = Client::findOrFail($id);
-
         return view('clients.edit', [
             'client' => $client
         ]);
@@ -82,14 +78,12 @@ class ClientController extends Controller
     /**
      * Atualiza o cliente no banco de dados
      *
-     * @param integer $id
+     * @param Client $client
      * @param ClientRequest $request
      * @return RedirectResponse
      */
-    public function update(int $id, ClientRequest $request): RedirectResponse
+    public function update(Client $client, ClientRequest $request): RedirectResponse
     {
-        $client = Client::findOrFail($id);
-
         $client->update([
             'nome' => $request->nome,
             'endereco' => $request->endereco,
@@ -103,13 +97,11 @@ class ClientController extends Controller
     /**
      * Apaga um cliente no banco de dados
      *
-     * @param integer $id
+     * @param Client $client
      * @return RedirectResponse
      */
-    public function destroy(int $id): RedirectResponse
+    public function destroy(Client $client): RedirectResponse
     {
-        $client = Client::findOrFail($id);
-
         $client->delete();
 
         return redirect('/clients');
