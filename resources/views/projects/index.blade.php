@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($projects as $project)
+            @forelse ($projects as $project)
                 <tr>
                     <th scope="row">{{ $project->id }}</th>
                     <td><a href="{{ route('projects.show', $project) }}">{{ $project->nome }}</a></td>
@@ -30,9 +30,18 @@
                         </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td></td>
+                    <td>Nenhum Projeto Cadastrado</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
+
+    {{ $projects->links() }}
 
     <a class="btn btn-success" href="{{ route('projects.create') }}">Novo Projeto</a>
 @endsection    
